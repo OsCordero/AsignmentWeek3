@@ -1,0 +1,48 @@
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 75%;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: #696666;
+}
+
+.tag-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+  height: 50px !important;
+}
+
+li {
+  list-style: none;
+}
+
+h2 {
+  margin: 0;
+}
+
+.featured-posts {
+  display: -ms-grid;
+  display: grid;
+}
+/*# sourceMappingURL=main.css.map */

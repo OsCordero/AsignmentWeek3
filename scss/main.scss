@@ -1,0 +1,30 @@
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+  color: #696666;
+}
+.tag-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+  height: 50px !important;
+}
+li {
+  list-style: none;
+}
+h2 {
+  margin: 0;
+}
+.featured-posts {
+  display: grid;
+}
