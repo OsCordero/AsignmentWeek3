@@ -54,6 +54,10 @@ h3 {
   margin: 0;
 }
 
+h2.logo a {
+  color: black;
+}
+
 .featured-section {
   width: 85%;
   margin: 0 auto;
@@ -118,9 +122,24 @@ img {
   display: block;
 }
 
+.post-list-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
 .posts-list {
   width: 65%;
   margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  grid-row-gap: 10px;
 }
 
 .post-list {
@@ -135,5 +154,220 @@ img {
   margin-bottom: 16px;
   background-size: cover;
   display: block;
+}
+
+.action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-right: 20px;
+}
+
+.action a {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.action a.delete {
+  color: red;
+}
+
+.action .edit {
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+}
+
+.small-post h3:hover,
+.small-post h1:hover,
+.small-post h2:hover,
+.large-post h3:hover,
+.large-post h1:hover,
+.large-post h2:hover,
+.medium-post h3:hover,
+.medium-post h1:hover,
+.medium-post h2:hover,
+.post-list h3:hover,
+.post-list h1:hover,
+.post-list h2:hover {
+  cursor: pointer;
+}
+
+/************************************************
+***************Create/Edit page******************
+*************************************************/
+.create-form,
+.edit-form {
+  margin-bottom: 30px;
+}
+
+.form-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+  grid-row-gap: 5px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.form-grid label {
+  font-weight: 600;
+}
+
+input {
+  border-bottom: 1px solid black !important;
+  max-width: 90%;
+}
+
+input {
+  border: #f2f2f2;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  font-size: 20px;
+  height: 30px;
+  width: 100%;
+}
+
+input:focus {
+  border-bottom: 2px solid black !important;
+  outline: none;
+}
+
+.btn {
+  width: 50%;
+  margin: 0 auto;
+  color: black;
+  height: 30px;
+  border: 1.5px solid black;
+  font-size: 20px;
+  background: white;
+  border-radius: 5px 5px;
+  margin-top: 20px;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
+  padding: 0 10px;
+  padding-bottom: 10px;
+}
+
+.btn-sm {
+  height: 15px;
+  padding-bottom: 2px;
+  border: 1.3px solid black;
+  font-size: 17px;
+}
+
+textarea {
+  border: 1px solid black;
+  max-width: 100%;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.success {
+  height: 50px;
+  border-radius: 0.5em;
+  color: #4f8a10;
+  background-color: #dff2bf;
+  width: 50%;
+  margin: 10px auto;
+  display: none;
+}
+
+.success span {
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s 1.5s, opacity 1.5s linear;
+  transition: visibility 0s 1.5s, opacity 1.5s linear;
+}
+
+/*******************************************************
+**********************Read post Styles******************
+********************************************************/
+.post-content {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.post-header {
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.post-header h1 {
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 30px;
+}
+
+.post-header h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  color: #727272;
+}
+
+.post-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  height: auto;
+}
+
+.image {
+  display: block;
+  width: 700px;
+  max-width: 70%;
+  height: 399px;
+  background-image: url("https://images.unsplash.com/photo-1576018391030-94f475d9a716?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.post-body {
+  margin-bottom: 30px;
+}
+
+.post-img {
+  width: 100%;
+  height: auto;
+}
+
+.tags-list {
+  display: -ms-grid;
+  display: grid;
+  width: 100px;
+  -ms-grid-columns: auto auto auto auto auto auto auto auto;
+      grid-template-columns: auto auto auto auto auto auto auto auto;
+  grid-row-gap: 5px;
+  margin-bottom: 30px;
+}
+
+.tags-list li {
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.tags-list li a {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  padding: 5px;
 }
 /*# sourceMappingURL=main.css.map */

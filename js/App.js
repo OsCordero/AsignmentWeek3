@@ -1,31 +1,42 @@
-const Ui = new UI();
-const Apijson = new ApiJson();
-const PageState = function() {
-  let currentState = new homeState(this);
+//create post
+document.querySelector('#create-post').addEventListener('click', e => {
+  e.preventDefault();
+  page.change(new createPostState());
+  document.querySelector('#create-btn').addEventListener('click', e => {
+    e.preventDefault();
+    const postData = Ui.getPostData();
+    Apijson.postPost(postData);
+  });
+});
 
-  this.init = function() {
-    this.change(new homeState());
-  };
-  this.change = function(state) {
-    currentState = state;
-  };
-};
+//edit post
+document.querySelector('body').addEventListener('click', async e => {
+  if (e.target.classList.contains('edit')) {
+    e.preventDefault();
+    page.change(await editPostState(e.target.id));
 
-const homeState = function(page) {
-  Apijson.getPosts()
-    .then(data => {
-      Ui.renderHomePage(data);
-    })
-    .catch(err => {
-      // Ui.printErrorOutput();
+    document.querySelector('#edit-btn').addEventListener('click', e => {
+      e.preventDefault();
+      const postData = Ui.getPostData();
+      console.log(postData);
+      Apijson.updatePost(postData);
     });
-};
+  }
+});
 
-const createPostState = function(page) {};
-
-const readPostState = function(page) {};
-
-//instanciate pageState
-const page = new PageState();
-
-//Init the first state
+//read post
+//edit post
+document.querySelector('body').addEventListener('click', e => {
+  // if (e.target.classList.contains('edit')) {
+  //e.preventDefault();
+  //   page.change(new editPostState(e.target.id));
+  //   setTimeout(() => {
+  //     document.querySelector('#edit-btn').addEventListener('click', e => {
+  //       e.preventDefault();
+  //       const postData = Ui.getPostData();
+  //       console.log(postData);
+  //       Apijson.updatePost(postData);
+  //     });
+  //   }, 1000);
+  // }
+});
