@@ -24,6 +24,12 @@ nav {
   margin: 0 auto;
 }
 
+.nav-buttons {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
 a {
   text-decoration: none;
   color: #696666;
@@ -175,7 +181,7 @@ img {
   color: red;
 }
 
-.action .edit {
+.edit {
   -webkit-transform: scale(-1, 1);
           transform: scale(-1, 1);
 }
@@ -369,5 +375,14 @@ textarea {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   padding: 5px;
+}
+
+.search-input {
+  max-width: 30%;
+}
+
+.search-post {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
 }
 /*# sourceMappingURL=main.css.map */

@@ -19,13 +19,14 @@ class UI {
     document.querySelector('.large-posts').innerHTML = `
     <div class="large-post" id="${posts[0].id}">
         <a class="large-post-image" href=""></a>
-        <h1>${posts[0].title}</h1>
+        <h1 class="read" id="${posts[0].id}">${posts[0].title}</h1>
         <p>
         ${posts[0].subTitle}
         </p>
         <div class="action">
             <a class="delete" href="" id="${posts[0].id}">&#10008</a>
             <a class="edit" href="" id="${posts[0].id}">&#9998</a>
+          
         </div>
     `;
     document.querySelector('.large-post-image').style.backgroundImage = `url('${posts[0].image}')`;
@@ -38,7 +39,7 @@ class UI {
         <div class="small-post id="${posts[i].id}">
             <a class="small-post-image sm-post-${posts[i].id}" href=""></a>
             <div class="small-post-content">
-                <h3>${posts[i].title}</h3>
+                <h3 class="read" id="${posts[i].id}">${posts[i].title}</h3>
                 <p>
                 ${posts[i].subTitle}
                 </p>
@@ -59,7 +60,7 @@ class UI {
     document.querySelector('.medium-posts').innerHTML = `
         <div class="medium-post id="${posts[4].id}">
             <a class="medium-post-image" href=""></a>
-            <h1>${posts[4].title}</h1>
+            <h1 class="read" id="${posts[4].id}">${posts[4].title}</h1>
             <p>
             ${posts[4].subTitle}
             </p>
@@ -79,7 +80,7 @@ class UI {
         <div class="post-list id="${posts[i].id}">
           <div class="post-list-content">
             <div class="post-list-data">
-            <h2>${posts[i].title}</h2>
+            <h2 class="read" id="${posts[i].id}">${posts[i].title}</h2>
             <p>
               ${posts[i].subTitle}
             </p>
@@ -168,9 +169,38 @@ class UI {
         `;
   }
 
-  renderReadPostPage() {
+  renderReadPostPage(post) {
     document.querySelector('.content').innerHTML = `
-        <p>This is the read pahe </p>
+        <div class="post-content">
+        <div class="post-header">
+          <h1>
+           ${post.title}
+          </h1>
+          <h3>${post.subTitle}</h3>
+          <div class="post-info">
+            <p>${post.author}</p>
+            <p>${post.createDate}</p>
+          </div>
+        </div>
+        <div class="post-body">
+          <div class="post-image"><div class="image"></div></div>
+          <p>
+            ${post.body}
+          </p>
+        </div>
+        <div class="post-tags">
+          <ul class="tags-list">
+            <li><a href="">tagewfdqweSs</a></li>
+            <li><a href="">tags</a></li>
+            <li><a href="">tags</a></li>
+            <li><a href="">tags</a></li>
+            <li><a href="">tagewfdqweSs</a></li>
+            <li><a href="">tags</a></li>
+            <li><a href="">tags</a></li>
+            <li><a href="">tags</a></li>
+            
+        </div>
+      </div>
         `;
   }
 

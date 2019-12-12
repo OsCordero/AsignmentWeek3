@@ -16,6 +16,9 @@ nav {
   width: 75%;
   margin: 0 auto;
 }
+.nav-buttons {
+  justify-content: flex-end;
+}
 a {
   text-decoration: none;
   color: #696666;
@@ -122,9 +125,9 @@ img {
   a.delete {
     color: red;
   }
-  .edit {
-    transform: scale(-1, 1);
-  }
+}
+.edit {
+  transform: scale(-1, 1);
 }
 .small-post,
 .large-post,
@@ -285,4 +288,12 @@ textarea {
     border-radius: 3px;
     padding: 5px;
   }
+}
+
+//search input
+.search-input {
+  max-width: 30%;
+}
+.search-post {
+  transform: rotate(45deg);
 }

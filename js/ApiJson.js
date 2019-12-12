@@ -15,6 +15,20 @@ class ApiJson {
 
     return posts;
   }
+  async getSearchPosts(value) {
+    let data = {};
+    const postsResponse = await fetch(
+      this.url + '/posts?_sort=createDate&_order=desc&title_like=' + value
+    );
+    const posts = await postsResponse.json();
+
+    if (postsResponse.status === 200) {
+    } else {
+      throw new Error(postsResponse.statusText);
+    }
+
+    return posts;
+  }
   async getPost(id) {
     let data = {};
     const postsResponse = await fetch(this.url + '/posts/' + id);
@@ -51,6 +65,19 @@ class ApiJson {
     if (response.status !== 400) {
       const resData = await response.json();
       Ui.printSuccess('edited');
+      return resData;
+    }
+  }
+  async deletePost(id) {
+    const response = await fetch(this.url + '/posts/' + id, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    if (response.status !== 400) {
+      const resData = await response.json();
+      Ui.printSuccess('deleted');
       return resData;
     }
   }

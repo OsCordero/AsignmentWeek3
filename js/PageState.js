@@ -2,7 +2,7 @@ const Ui = new UI();
 const Apijson = new ApiJson();
 const PageState = function() {
   let currentState = new homeState(this);
-  console.log(currentState);
+
   this.init = function() {
     this.change(new homeState());
   };
@@ -21,8 +21,25 @@ const homeState = function(page) {
     });
 };
 
-const readPostState = function(page) {
-  Ui.renderReadPostPage();
+const homeSearchState = function(value) {
+  Apijson.getSearchPosts(value)
+    .then(data => {
+      Ui.renderHomePage(data);
+    })
+    .catch(err => {
+      // Ui.printErrorOutput();
+    });
+};
+
+const readPostState = function(id) {
+  Apijson.getPost(id)
+    .then(data => {
+      Ui.renderReadPostPage(data);
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 const createPostState = function(page) {
