@@ -35,7 +35,6 @@ const readPostState = function(id) {
   Apijson.getPost(id)
     .then(data => {
       Ui.renderReadPostPage(data);
-      console.log(data);
     })
     .catch(err => {
       console.log(err);
@@ -49,7 +48,6 @@ const editPostState = async function(id) {
   await Apijson.getPost(id)
     .then(data => {
       Ui.renderEditPostPage(data);
-      console.log(data);
     })
     .catch(err => {
       console.log(err);

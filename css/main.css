@@ -25,6 +25,13 @@ nav {
 }
 
 .nav-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.search-form {
+  width: 300px;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
@@ -36,9 +43,6 @@ a {
 }
 
 .tag-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -48,6 +52,17 @@ a {
   width: 70%;
   margin: 20px auto;
   height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.tag-bar li {
+  margin-right: 20px;
+  display: inline-block;
 }
 
 li {
@@ -366,19 +381,21 @@ textarea {
   margin-bottom: 30px;
 }
 
-.tags-list li {
+.tags-list,
+.tag-bar li {
   margin-right: 20px;
   margin-bottom: 10px;
 }
 
-.tags-list li a {
+.tags-list a,
+.tag-bar li a {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   padding: 5px;
 }
 
 .search-input {
-  max-width: 30%;
+  max-width: 50%;
 }
 
 .search-post {

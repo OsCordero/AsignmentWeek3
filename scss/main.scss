@@ -16,20 +16,33 @@ nav {
   width: 75%;
   margin: 0 auto;
 }
+
 .nav-buttons {
+  display: flex;
+}
+.search-form {
+  width: 300px;
   justify-content: flex-end;
 }
+
 a {
   text-decoration: none;
   color: #696666;
 }
 .tag-bar {
-  display: flex;
   align-items: center;
   justify-content: space-between;
   width: 70%;
   margin: 20px auto;
   height: 50px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  li {
+    margin-right: 20px;
+    display: inline-block;
+  }
 }
 li {
   list-style: none;
@@ -279,7 +292,8 @@ textarea {
   grid-row-gap: 5px;
   margin-bottom: 30px;
 }
-.tags-list li {
+.tags-list,
+.tag-bar li {
   margin-right: 20px;
   margin-bottom: 10px;
 
@@ -292,7 +306,7 @@ textarea {
 
 //search input
 .search-input {
-  max-width: 30%;
+  max-width: 50%;
 }
 .search-post {
   transform: rotate(45deg);

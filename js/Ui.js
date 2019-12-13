@@ -1,7 +1,6 @@
 class UI {
   renderHomePage(posts) {
     //setting featured posts
-    //LARGE FEATURED POSTS
 
     document.querySelector('.content').innerHTML = `
     <section class="featured-section">
@@ -16,6 +15,7 @@ class UI {
       <section class="posts-list"></section>
     `;
     document.querySelector('.large-posts').textContent = null;
+
     document.querySelector('.large-posts').innerHTML = `
     <div class="large-post" id="${posts[0].id}">
         <a class="large-post-image" href=""></a>
@@ -29,6 +29,7 @@ class UI {
           
         </div>
     `;
+    // document.querySelector('.large-posts').onclick = () => this.imprimir();
     document.querySelector('.large-post-image').style.backgroundImage = `url('${posts[0].image}')`;
 
     //SMALL FEATURED POSTS
@@ -180,6 +181,7 @@ class UI {
           <div class="post-info">
             <p>${post.author}</p>
             <p>${post.createDate}</p>
+            <p> likes ❤: ${post.likes ? post.likes : 0}</p>
           </div>
         </div>
         <div class="post-body">
@@ -190,18 +192,15 @@ class UI {
         </div>
         <div class="post-tags">
           <ul class="tags-list">
-            <li><a href="">tagewfdqweSs</a></li>
-            <li><a href="">tags</a></li>
-            <li><a href="">tags</a></li>
-            <li><a href="">tags</a></li>
-            <li><a href="">tagewfdqweSs</a></li>
-            <li><a href="">tags</a></li>
-            <li><a href="">tags</a></li>
-            <li><a href="">tags</a></li>
-            
+          </ul>
         </div>
       </div>
         `;
+
+    post.tags.forEach(tag => {
+      document.querySelector('.tags-list').innerHTML += `
+      <li><a href="">${tag}</a></li>  `;
+    });
   }
 
   getPostData() {
@@ -212,7 +211,11 @@ class UI {
     const author = document.querySelector('#author').value;
     const createDate = document.querySelector('#date').value.replace(/-/g, '/'); //date format on api
     const body = document.querySelector('#body').value;
-    const tags = document.querySelector('#tags').value;
+    const tags = document
+      .querySelector('#tags')
+      .value.toLowerCase()
+      .replace(/\s/g, '')
+      .split(',');
 
     const postData = {
       id,
