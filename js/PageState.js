@@ -31,8 +31,18 @@ const homeSearchState = function(value) {
     });
 };
 
-const readPostState = function(id) {
-  Apijson.getPost(id)
+const homeFilterState = function(tag) {
+  Apijson.getFilterPosts(tag)
+    .then(data => {
+      Ui.renderHomePage(data);
+    })
+    .catch(err => {
+      // Ui.printErrorOutput();
+    });
+};
+
+const readPostState = async function(id) {
+  await Apijson.getPost(id)
     .then(data => {
       Ui.renderReadPostPage(data);
     })
@@ -47,6 +57,7 @@ const createPostState = function(page) {
 const editPostState = async function(id) {
   await Apijson.getPost(id)
     .then(data => {
+      console.log(data);
       Ui.renderEditPostPage(data);
     })
     .catch(err => {

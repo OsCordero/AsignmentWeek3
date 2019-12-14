@@ -1,3 +1,12 @@
+async function fillTagBar() {
+  tags = await Apijson.getTags();
+  tags.forEach(tag => {
+    document.querySelector(
+      '.tag-bar'
+    ).innerHTML += ` <li><a class="tag" href="">${tag.name}</a></li>`;
+  });
+}
+fillTagBar();
 //create post
 document.querySelector('#create-post').addEventListener('click', e => {
   e.preventDefault();
@@ -20,7 +29,7 @@ document.querySelector('#create-post').addEventListener('click', e => {
 });
 
 //edit post
-document.querySelector('body').addEventListener('click', async e => {
+document.querySelector('.content').addEventListener('click', async e => {
   if (e.target.classList.contains('edit')) {
     e.preventDefault();
     page.change(await editPostState(e.target.id));
@@ -33,9 +42,14 @@ document.querySelector('body').addEventListener('click', async e => {
 
     document.querySelector('#edit-btn').addEventListener('click', async e => {
       e.preventDefault();
-      const postData = Ui.getPostData();
-      await Apijson.checkTags(postData.tags);
+      const postData = await Ui.getPostData();
+      const clonePostData = { ...postData };
+      console.log(clonePostData);
+      await Apijson.checkTags(clonePostData.tags);
+      console.log(postData.tags);
+
       const tagsId = await Apijson.getTagsIds(postData.tags);
+      console.log(tagsId);
       postData.tags = tagsId;
       console.log(postData);
       Apijson.updatePost(postData);
@@ -44,15 +58,22 @@ document.querySelector('body').addEventListener('click', async e => {
 });
 
 //read post
-document.querySelector('body').addEventListener('click', e => {
+document.querySelector('.content').addEventListener('click', async e => {
   if (e.target.classList.contains('read')) {
     e.preventDefault();
-    page.change(new readPostState(e.target.id));
+    page.change(await readPostState(e.target.id));
+    document.querySelector('.tags-list').addEventListener('click', e => {
+      if (e.target.classList.contains('tag')) {
+        e.preventDefault();
+        tag = e.target.innerHTML;
+        page.change(new homeFilterState(tag));
+      }
+    });
   }
 });
 
 //delete post
-document.querySelector('body').addEventListener('click', e => {
+document.querySelector('.content').addEventListener('click', e => {
   if (e.target.classList.contains('delete')) {
     e.preventDefault();
     if (confirm('are you sure? this can not be undone!')) {
@@ -68,13 +89,15 @@ document.querySelector('.search-form').addEventListener('submit', e => {
   page.change(new homeSearchState(title));
 });
 
-async function fillTagBar() {
-  tags = await Apijson.getTags();
-  console.log(tags);
-  tags.forEach(tag => {
-    console.log('aber');
-    console.log(document.querySelector('.tag-bar'));
-    document.querySelector('.tag-bar').innerHTML += ` <li><a href="">${tag.name}</a></li>`;
+//filter post by tag
+function filterByTag() {
+  document.querySelector('.tag-bar').addEventListener('click', e => {
+    if (e.target.classList.contains('tag')) {
+      e.preventDefault();
+      tag = e.target.innerHTML;
+      page.change(new homeFilterState(tag));
+    }
   });
 }
-fillTagBar();
+
+filterByTag();

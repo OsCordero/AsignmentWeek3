@@ -135,6 +135,7 @@ class UI {
 
   renderEditPostPage(post) {
     const date = new Date(post.createDate).toISOString().substr(0, 10);
+
     document.querySelector('.content').innerHTML = `
         <div class="edit-form">
       
@@ -199,11 +200,11 @@ class UI {
 
     post.tags.forEach(tag => {
       document.querySelector('.tags-list').innerHTML += `
-      <li><a href="">${tag}</a></li>  `;
+      <li><a class="tag" href="">${tag}</a></li>  `;
     });
   }
 
-  getPostData() {
+  async getPostData() {
     const id = document.querySelector('#id') == null ? null : document.querySelector('#id').value;
     const image = document.querySelector('#image').value;
     const title = document.querySelector('#title').value;
@@ -216,7 +217,6 @@ class UI {
       .value.toLowerCase()
       .replace(/\s/g, '')
       .split(',');
-
     const postData = {
       id,
       image,

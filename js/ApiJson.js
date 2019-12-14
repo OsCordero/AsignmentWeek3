@@ -29,6 +29,24 @@ class ApiJson {
 
     return posts;
   }
+
+  async getFilterPosts(tag) {
+    console.log(tag);
+    const tagId = await this.getTagsIds([tag]);
+    console.log(tagId);
+    const posts = await this.getPosts();
+    let filterPosts = [];
+    let i;
+    for (i = 0; i < posts.length; i++) {
+      for (let j = 0; j < posts[i].tags.length; j++) {
+        if (posts[i].tags[j] == tagId) {
+          filterPosts.push(posts[i]);
+          break;
+        }
+      }
+    }
+    return filterPosts;
+  }
   async getPost(id) {
     let data = {};
     const postsResponse = await fetch(this.url + '/posts/' + id);
@@ -87,7 +105,6 @@ class ApiJson {
   async getTags() {
     const response = await fetch(this.url + '/tags');
     const tags = await response.json();
-    console.log(tags);
     return tags;
   }
   async checkTags(tags) {
@@ -98,17 +115,19 @@ class ApiJson {
     const response = await fetch(this.url + tagsUrl);
     const repeatedTags = await response.json();
     const stringTags = repeatedTags.map(tag => {
+      console.log(tag);
       return tag.name.toLowerCase();
     });
     const newTags = tags.filter(x => !stringTags.includes(x));
-    const objetNewTags = newTags.map(name => ({ name }));
+    const objetNewTags = newTags.map(name => ({ name, slug: name }));
+    console.log(objetNewTags);
     await this.postTags(objetNewTags);
+    console.log(newTags);
     return newTags;
   }
 
   async postTags(tags) {
-    console.log(JSON.stringify(tags[0]));
-    await tags.forEach(async tag => {
+    tags.forEach(async tag => {
       await fetch(this.url + '/tags', {
         method: 'POST',
         headers: {
@@ -124,21 +143,28 @@ class ApiJson {
     tags.forEach(tag => {
       tagsUrl += 'name=' + tag + '&';
     });
+    console.log(tags);
+
     const response = await fetch(this.url + tagsUrl);
     const fetchedTags = await response.json();
+    console.log(fetchedTags);
     const tagsIds = fetchedTags.map(tag => tag.id);
-    console.log(tagsIds);
+
     return tagsIds;
   }
 
   async getTagsNames(tags) {
-    let tagsUrl = '/tags?';
-    tags.forEach(tag => {
-      tagsUrl += 'id=' + tag + '&';
-    });
-    const response = await fetch(this.url + tagsUrl);
-    const fetchedTags = await response.json();
-    const tagsNames = fetchedTags.map(tag => tag.name);
-    return tagsNames;
+    if (tags.length > 0) {
+      let tagsUrl = '/tags?';
+      tags.forEach(tag => {
+        tagsUrl += 'id=' + tag + '&';
+      });
+      const response = await fetch(this.url + tagsUrl);
+      const fetchedTags = await response.json();
+      const tagsNames = fetchedTags.map(tag => tag.name);
+      return tagsNames;
+    } else {
+      return '';
+    }
   }
 }
