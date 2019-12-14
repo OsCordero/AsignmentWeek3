@@ -4,7 +4,6 @@ class ApiJson {
   }
 
   async getPosts() {
-    let data = {};
     const postsResponse = await fetch(this.url + '/posts?_sort=createDate&_order=desc');
     const posts = await postsResponse.json();
 
@@ -16,7 +15,6 @@ class ApiJson {
     return posts;
   }
   async getSearchPosts(value) {
-    let data = {};
     const postsResponse = await fetch(
       this.url + '/posts?_sort=createDate&_order=desc&title_like=' + value
     );
@@ -76,7 +74,6 @@ class ApiJson {
   }
 
   async updatePost(post) {
-    console.log(post);
     const response = await fetch(this.url + '/posts/' + post.id, {
       method: 'PUT',
       headers: {
@@ -104,12 +101,37 @@ class ApiJson {
     }
   }
 
+  async getAuthors() {
+    const authorsResponse = await fetch(this.url + '/authors');
+    const authors = await authorsResponse.json();
+
+    if (authorsResponse.status === 200) {
+    } else {
+      throw new Error(authorsResponse.statusText);
+    }
+
+    return authors;
+  }
+
+  async getAuthorName(id) {
+    const authorResponse = await fetch(this.url + '/authors/' + id);
+    const author = await authorResponse.json();
+
+    if (authorResponse.status === 200) {
+    } else {
+      throw new Error(authorResponse.statusText);
+    }
+
+    return author.name + ' ' + author.lastName;
+  }
+
   async getTags() {
     const response = await fetch(this.url + '/tags');
     const tags = await response.json();
     return tags;
   }
   async checkTags(tags) {
+    console.log(tags);
     let tagsUrl = '/tags?';
     tags.forEach(tag => {
       tagsUrl += 'name=' + tag + '&';
@@ -119,7 +141,10 @@ class ApiJson {
     const stringTags = repeatedTags.map(tag => {
       return tag.name.toLowerCase();
     });
-    const newTags = tags.filter(x => !stringTags.includes(x));
+    const inputTags = tags.map(tag => {
+      return tag.toLowerCase();
+    });
+    const newTags = inputTags.filter(x => !stringTags.includes(x));
     const objetNewTags = newTags.map(name => ({ name, slug: name }));
     console.log(objetNewTags);
     await this.postTags(objetNewTags);

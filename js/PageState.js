@@ -22,43 +22,50 @@ const homeState = function(page) {
 };
 
 const homeSearchState = function(value) {
-  Apijson.getSearchPosts(value)
-    .then(data => {
+  Apijson.getSearchPosts(value).then(
+    data => {
       Ui.renderHomePage(data);
-    })
-    .catch(err => {
-      // Ui.printErrorOutput();
-    });
+    },
+    err => {
+      Ui.printErrorOutput();
+    }
+  );
 };
 
 const homeFilterState = function(tag) {
-  Apijson.getFilterPosts(tag)
-    .then(data => {
+  Apijson.getFilterPosts(tag).then(
+    data => {
       Ui.renderHomePage(data);
-    })
-    .catch(err => {
-      // Ui.printErrorOutput();
-    });
+    },
+    err => {
+      Ui.printErrorOutput();
+    }
+  );
 };
 
 const readPostState = async function(id) {
   await Apijson.getPost(id)
-    .then(data => {
-      Ui.renderReadPostPage(data);
+    .then(async post => {
+      authorName = await Apijson.getAuthorName(post.author);
+      Ui.renderReadPostPage(post, authorName);
     })
     .catch(err => {
       console.log(err);
     });
 };
 
-const createPostState = function(page) {
-  Ui.renderCreatePostPage();
+const createPostState = async function(page) {
+  await Apijson.getAuthors().then(authors => {
+    Ui.renderCreatePostPage(authors);
+  });
 };
 const editPostState = async function(id) {
   await Apijson.getPost(id)
-    .then(data => {
-      Ui.renderEditPostPage(data);
-      console.log(data);
+    .then(async post => {
+      await Apijson.getAuthors().then(authors => {
+        console.log(post);
+        Ui.renderEditPostPage(post, authors);
+      });
     })
     .catch(err => {
       console.log(err);

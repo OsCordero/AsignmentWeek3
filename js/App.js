@@ -1,5 +1,7 @@
 async function fillTagBar() {
-  tags = await Apijson.getTags();
+  tags = await Apijson.getTags().catch(err => {
+    Ui.printErrorOutput();
+  });
   tags.forEach(tag => {
     document.querySelector(
       '.tag-bar'
@@ -8,9 +10,9 @@ async function fillTagBar() {
 }
 fillTagBar();
 //create post
-document.querySelector('#create-post').addEventListener('click', e => {
+document.querySelector('#create-post').addEventListener('click', async e => {
   e.preventDefault();
-  page.change(new createPostState());
+  page.change(await createPostState());
   document.querySelector('#tags').addEventListener('keyup', e => {
     if (e.target.value == ',') {
       e.target.value = '';
@@ -43,7 +45,9 @@ document.querySelector('.content').addEventListener('click', async e => {
     document.querySelector('#edit-btn').addEventListener('click', async e => {
       e.preventDefault();
       const postData = await Ui.getPostData();
+      console.log(postData);
       await Apijson.checkTags(postData.tags);
+
       const tagsId = await Apijson.getTagsIds(postData.tags);
       postData.tags = tagsId;
       Apijson.updatePost(postData);

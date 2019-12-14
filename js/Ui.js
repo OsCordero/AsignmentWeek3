@@ -99,7 +99,7 @@ class UI {
     }
   }
 
-  renderCreatePostPage() {
+  renderCreatePostPage(authors) {
     document.querySelector('.content').innerHTML = `
         <div class="create-form">
         <form action="">
@@ -115,7 +115,9 @@ class UI {
             <input type="text" name="subtiTle" id="subtitle" />
             <span class="error" id="error-subtitle"></span>
             <label for="image">Author:</label>
-            <input type="text" name="author" id="author" />
+            <select name="author" id="author">
+              <option value="-1">Select author</option>
+            </select>
             <span class="error" id="error-author"></span>
             <label for="image">Date:</label>
             <input type="date" name="date" id="date" />
@@ -131,9 +133,16 @@ class UI {
         </form>
       </div>
         `;
+    authors.forEach(author => {
+      var opt = document.createElement('option');
+      opt.value = author.id;
+      opt.innerHTML = author.name + ' ' + author.lastName;
+
+      document.querySelector('select').appendChild(opt);
+    });
   }
 
-  renderEditPostPage(post) {
+  renderEditPostPage(post, authors) {
     const date = new Date(post.createDate).toISOString().substr(0, 10);
 
     document.querySelector('.content').innerHTML = `
@@ -153,7 +162,9 @@ class UI {
             <input type="text" name="subtiTle" id="subtitle" value="${post.subTitle}"/>
             <span class="error" id="error-subtitle"></span>
             <label for="image">Author:</label>
-            <input type="text" name="author" id="author" value="${post.author} "/>
+            <select name="author" id="author">
+              <option value="-1">Select author</option>
+            </select>
             <span class="error" id="error-author"></span>
             <label for="image">Date:</label>
             <input type="date" name="date" id="date" value="${date}"/>
@@ -169,9 +180,20 @@ class UI {
         </form>
       </div>
         `;
+
+    authors.forEach(author => {
+      var opt = document.createElement('option');
+      opt.value = author.id;
+      opt.innerHTML = author.name + ' ' + author.lastName;
+      if (author.id == post.author) {
+        opt.selected = 'true';
+      }
+
+      document.querySelector('select').appendChild(opt);
+    });
   }
 
-  renderReadPostPage(post) {
+  renderReadPostPage(post, author) {
     document.querySelector('.content').innerHTML = `
         <div class="post-content">
         <div class="post-header">
@@ -180,7 +202,7 @@ class UI {
           </h1>
           <h3>${post.subTitle}</h3>
           <div class="post-info">
-            <p>${post.author}</p>
+            <p>${author}</p>
             <p>${post.createDate}</p>
             <p> likes ❤: ${post.likes ? post.likes : 0}</p>
           </div>
@@ -214,8 +236,7 @@ class UI {
     const body = document.querySelector('#body').value;
     const tags = document
       .querySelector('#tags')
-      .value.toLowerCase()
-      .replace(/\s/g, '')
+      .value.replace(/\s/g, '')
       .split(',');
     const postData = {
       id,
@@ -325,5 +346,12 @@ class UI {
       document.querySelector('.success').style.display = 'none';
     }, 3500);
     window.scroll(0, 0);
+  }
+
+  printErrorOutput() {
+    document.querySelector('.content').innerHTML = `
+    <div class="error-output">
+<h1>Sorry! Something went wrong</h1>
+</div>`;
   }
 }
