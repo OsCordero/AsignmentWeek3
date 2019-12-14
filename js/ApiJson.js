@@ -6,7 +6,6 @@ class ApiJson {
   async getPosts() {
     const postsResponse = await fetch(this.url + '/posts?_sort=createDate&_order=desc');
     const posts = await postsResponse.json();
-
     if (postsResponse.status === 200) {
     } else {
       throw new Error(postsResponse.statusText);
@@ -46,7 +45,6 @@ class ApiJson {
     return filterPosts;
   }
   async getPost(id) {
-    let data = {};
     const postsResponse = await fetch(this.url + '/posts/' + id);
     const post = await postsResponse.json();
     if (postsResponse.status === 200) {
@@ -100,7 +98,18 @@ class ApiJson {
       return resData;
     }
   }
-
+  async likePost(id) {
+    const postsResponse = await fetch(this.url + '/posts/' + id);
+    const post = await postsResponse.json();
+    console.log(typeof post.likes == 'undefined');
+    if (typeof post.likes == 'undefined' || post.likes == 0) {
+      post.likes = 1;
+    } else {
+      post.likes += 1;
+    }
+    console.log(post);
+    this.updatePost(post);
+  }
   async getAuthors() {
     const authorsResponse = await fetch(this.url + '/authors');
     const authors = await authorsResponse.json();

@@ -298,6 +298,11 @@ textarea {
   font-size: 12px;
 }
 
+.like {
+  color: red;
+  font-size: 12px;
+}
+
 .error-output {
   display: -webkit-box;
   display: -ms-flexbox;

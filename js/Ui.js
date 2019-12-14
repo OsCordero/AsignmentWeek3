@@ -24,9 +24,9 @@ class UI {
         ${posts[0].subTitle}
         </p>
         <div class="action">
-            <a class="delete" href="" id="${posts[0].id}">&#10008</a>
-            <a class="edit" href="" id="${posts[0].id}">&#9998</a>
-          
+          <a class="like" href="" id="${posts[0].id}">❤</a>
+          <a class="delete" href="" id="${posts[0].id}">&#10008</a>
+          <a class="edit" href="" id="${posts[0].id}">&#9998</a> 
         </div>
     `;
     // document.querySelector('.large-posts').onclick = () => this.imprimir();
@@ -45,8 +45,9 @@ class UI {
                 ${posts[i].subTitle}
                 </p>
                  <div class="action">
-                    <a class="delete" href="" id="${posts[i].id}">&#10008</a>
-                    <a class="edit" href="" id="${posts[i].id}">&#9998</a>
+                  <a class="like" href="" id="${posts[i].id}">❤</a>
+                  <a class="delete" href="" id="${posts[i].id}">&#10008</a>
+                  <a class="edit" href="" id="${posts[i].id}">&#9998</a>
                 </div>
             </div>
         </div>
@@ -60,15 +61,16 @@ class UI {
     document.querySelector('.medium-posts').textContent = null;
     document.querySelector('.medium-posts').innerHTML = `
         <div class="medium-post id="${posts[4].id}">
-            <a class="medium-post-image" href=""></a>
-            <h1 class="read" id="${posts[4].id}">${posts[4].title}</h1>
-            <p>
-            ${posts[4].subTitle}
-            </p>
-            <div class="action">
+          <a class="medium-post-image" href=""></a>
+          <h1 class="read" id="${posts[4].id}">${posts[4].title}</h1>
+          <p>
+          ${posts[4].subTitle}
+          </p>
+          <div class="action">
+            <a class="like" href="" id="${posts[4].id}">❤</a>
             <a class="delete" href="" id="${posts[4].id}">&#10008</a>
             <a class="edit" href="" id="${posts[4].id}">&#9998</a>
-        </div>
+          </div>
         </div>`;
     document.querySelector('.medium-post-image').style.backgroundImage = `url('${posts[4].image}')`;
 
@@ -87,9 +89,10 @@ class UI {
             </p>
           </div>
             <div class="action">
-            <a class="delete" href="" id="${posts[i].id}">&#10008</a>
-            <a class="edit" href="" id="${posts[i].id}">&#9998</a>
-        </div>
+              <a class="like" href="" id="${posts[i].id}">❤</a>
+              <a class="delete" href="" id="${posts[i].id}">&#10008</a>
+              <a class="edit" href="" id="${posts[i].id}">&#9998</a>
+            </div>
           </div>
           <a href="" class="post-list-image post-list-${posts[i].id}"></a>
         </div>`;
@@ -152,6 +155,7 @@ class UI {
           <div class="form-grid">
             <h1 class="new-post">Edit Post: ${post.title} </h1>
             <input type="text" hidden name="id" id="id" value="${post.id}" value=""/>
+             <input type="text" hidden name="likes" id="likes" value="${post.likes}" value=""/>
             <label for="image">Image(Url):</label>
             <input type="text" name="image" id="image" value="${post.image} "/>
             <span class="error" id="error-image"></span>
@@ -234,6 +238,7 @@ class UI {
     const author = document.querySelector('#author').value;
     const createDate = document.querySelector('#date').value.replace(/-/g, '/'); //date format on api
     const body = document.querySelector('#body').value;
+    const likes = parseInt(document.querySelector('#likes').value);
     const tags = document
       .querySelector('#tags')
       .value.replace(/\s/g, '')
@@ -245,6 +250,7 @@ class UI {
       subTitle,
       author,
       createDate,
+      likes,
       body,
       tags,
     };

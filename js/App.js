@@ -80,6 +80,14 @@ document.querySelector('.content').addEventListener('click', e => {
   }
 });
 
+//like post
+document.querySelector('.content').addEventListener('click', e => {
+  if (e.target.classList.contains('like')) {
+    e.preventDefault();
+    Apijson.likePost(e.target.id);
+  }
+});
+
 //search post
 document.querySelector('.search-form').addEventListener('submit', e => {
   e.preventDefault();

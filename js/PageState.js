@@ -47,6 +47,7 @@ const readPostState = async function(id) {
   await Apijson.getPost(id)
     .then(async post => {
       authorName = await Apijson.getAuthorName(post.author);
+      console.log(post);
       Ui.renderReadPostPage(post, authorName);
     })
     .catch(err => {
