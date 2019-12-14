@@ -115,7 +115,6 @@ class ApiJson {
     const response = await fetch(this.url + tagsUrl);
     const repeatedTags = await response.json();
     const stringTags = repeatedTags.map(tag => {
-      console.log(tag);
       return tag.name.toLowerCase();
     });
     const newTags = tags.filter(x => !stringTags.includes(x));
@@ -127,7 +126,7 @@ class ApiJson {
   }
 
   async postTags(tags) {
-    tags.forEach(async tag => {
+    for (const tag of tags) {
       await fetch(this.url + '/tags', {
         method: 'POST',
         headers: {
@@ -135,7 +134,7 @@ class ApiJson {
         },
         body: JSON.stringify(tag),
       });
-    });
+    }
   }
 
   async getTagsIds(tags) {
