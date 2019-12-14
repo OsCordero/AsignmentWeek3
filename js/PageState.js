@@ -57,8 +57,8 @@ const createPostState = function(page) {
 const editPostState = async function(id) {
   await Apijson.getPost(id)
     .then(data => {
-      console.log(data);
       Ui.renderEditPostPage(data);
+      console.log(data);
     })
     .catch(err => {
       console.log(err);

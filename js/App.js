@@ -20,10 +20,10 @@ document.querySelector('#create-post').addEventListener('click', e => {
   document.querySelector('#create-btn').addEventListener('click', async e => {
     e.preventDefault();
 
-    const postData = Ui.getPostData();
-
-    const post = await Apijson.checkTags(postData.tags);
-    console.log(post);
+    const postData = await Ui.getPostData();
+    await Apijson.checkTags(postData.tags);
+    const tagsId = await Apijson.getTagsIds(postData.tags);
+    postData.tags = tagsId;
     Apijson.postPost(postData);
   });
 });
@@ -43,15 +43,9 @@ document.querySelector('.content').addEventListener('click', async e => {
     document.querySelector('#edit-btn').addEventListener('click', async e => {
       e.preventDefault();
       const postData = await Ui.getPostData();
-      const clonePostData = { ...postData };
-      console.log(clonePostData);
-      await Apijson.checkTags(clonePostData.tags);
-      console.log(postData.tags);
-
+      await Apijson.checkTags(postData.tags);
       const tagsId = await Apijson.getTagsIds(postData.tags);
-      console.log(tagsId);
       postData.tags = tagsId;
-      console.log(postData);
       Apijson.updatePost(postData);
     });
   }

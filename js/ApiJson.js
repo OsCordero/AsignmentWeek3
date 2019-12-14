@@ -60,6 +60,7 @@ class ApiJson {
     return post;
   }
   async postPost(post) {
+    console.log(post);
     const response = await fetch(this.url + '/posts', {
       method: 'POST',
       headers: {
@@ -75,6 +76,7 @@ class ApiJson {
   }
 
   async updatePost(post) {
+    console.log(post);
     const response = await fetch(this.url + '/posts/' + post.id, {
       method: 'PUT',
       headers: {
