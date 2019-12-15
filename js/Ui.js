@@ -235,7 +235,7 @@ class UI {
     const image = document.querySelector('#image').value;
     const title = document.querySelector('#title').value;
     const subTitle = document.querySelector('#subtitle').value;
-    const author = document.querySelector('#author').value;
+    const author = parseInt(document.querySelector('#author').value);
     const createDate = document.querySelector('#date').value.replace(/-/g, '/'); //date format on api
     const body = document.querySelector('#body').value;
     const likes = parseInt(document.querySelector('#likes').value);
